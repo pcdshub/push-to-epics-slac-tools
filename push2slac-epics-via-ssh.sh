@@ -14,6 +14,7 @@
 for gitdir in ${GIT_TOP}/package/epics/modules/*.git ${GIT_TOP}/package/epics/base/base.git
 do
     pushd "$gitdir" &> /dev/null || continue
+    git config --global --add safe.directory $(pwd -P) &> /dev/null
     (git remote get-url --push github-slac &> /dev/null) && (
         echo "* Updating $gitdir ..."
         # git push --dry-run --mirror github-slac
