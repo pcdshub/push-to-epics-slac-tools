@@ -10,7 +10,10 @@
 
 SLEEP_PERIOD=2
 
-[ -z "$GIT_TOP" ] && exit 1
+if [ -z "$GIT_TOP" ]; then
+  echo "GIT_TOP unset." >/dev/stderr
+  exit 1
+fi
 
 get_bad_commits() {
   # List all bad commits in the repository: that is, those without author names and e-mails

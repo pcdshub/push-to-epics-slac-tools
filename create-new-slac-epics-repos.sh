@@ -11,7 +11,10 @@
 #  Additionally requires the "gh" command-line tool (as available in pcds-envs)
 #  in your PATH.
 
-command -v gh || exit 1
+if ! command -v gh >/dev/null; then
+  echo "gh command-line tool unavailable on PATH." >/dev/stderr
+  exit 1
+fi
 
 repo_list_output=$(gh repo list slac-epics -L 10000 --json name --jq ".[].name")
 
